@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<rows>
+  <page>1</page>
+  <total>88</total>
+  <row id='1'>
+    <cell><![CDATA[1]]></cell>
+    <cell><![CDATA[苹果汁]]></cell>
+    <cell><![CDATA[每箱24瓶]]></cell>
+    <cell><![CDATA[18.0000]]></cell>
+    <cell><![CDATA[39]]></cell>
+    <cell><![CDATA[0]]></cell>
+    <cell><![CDATA[1]]></cell>
+  </row>
+  <row id='2'>
+    <cell><![CDATA[2]]></cell>
+    <cell><![CDATA[牛奶]]></cell>
+    <cell><![CDATA[每箱24瓶]]></cell>
+    <cell><![CDATA[19.0000]]></cell>
+    <cell><![CDATA[17]]></cell>
+    <cell><![CDATA[40]]></cell>
+    <cell><![CDATA[2]]></cell>
+  </row>
+  <row id='3'>
+    <cell><![CDATA[3]]></cell>
+    <cell><![CDATA[蕃茄酱]]></cell>
+    <cell><![CDATA[每箱12瓶]]></cell>
+    <cell><![CDATA[10.0000]]></cell>
+    <cell><![CDATA[13]]></cell>
+    <cell><![CDATA[70]]></cell>
+    <cell><![CDATA[3]]></cell>
+  </row>
+  <row id='4'>
+    <cell><![CDATA[4]]></cell>
+    <cell><![CDATA[盐]]></cell>
+    <cell><![CDATA[每箱12瓶]]></cell>
+    <cell><![CDATA[22.0000]]></cell>
+    <cell><![CDATA[53]]></cell>
+    <cell><![CDATA[0]]></cell>
+    <cell><![CDATA[4]]></cell>
+  </row>
+  <row id='5'>
+    <cell><![CDATA[5]]></cell>
+    <cell><![CDATA[麻油]]></cell>
+    <cell><![CDATA[每箱12瓶]]></cell>
+    <cell><![CDATA[21.3500]]></cell>
+    <cell><![CDATA[0]]></cell>
+    <cell><![CDATA[0]]></cell>
+    <cell><![CDATA[5]]></cell>
+  </row>
+  <row id='6'>
+    <cell><![CDATA[6]]></cell>
+    <cell><![CDATA[酱油]]></cell>
+    <cell><![CDATA[每箱12瓶]]></cell>
+    <cell><![CDATA[25.0000]]></cell>
+    <cell><![CDATA[120]]></cell>
+    <cell><![CDATA[0]]></cell>
+    <cell><![CDATA[6]]></cell>
+  </row>
+  <row id='7'>
+    <cell><![CDATA[7]]></cell>
+    <cell><![CDATA[海鲜粉]]></cell>
+    <cell><![CDATA[每箱30盒]]></cell>
+    <cell><![CDATA[30.0000]]></cell>
+    <cell><![CDATA[15]]></cell>
+    <cell><![CDATA[0]]></cell>
+    <cell><![CDATA[7]]></cell>
+  </row>
+  <row id='8'>
+    <cell><![CDATA[8]]></cell>
+    <cell><![CDATA[胡椒粉]]></cell>
+    <cell><![CDATA[每箱30盒]]></cell>
+    <cell><![CDATA[40.0000]]></cell>
+    <cell><![CDATA[6]]></cell>
+    <cell><![CDATA[0]]></cell>
+    <cell><![CDATA[8]]></cell>
+  </row>
+  <row id='9'>
+    <cell><![CDATA[9]]></cell>
+    <cell><![CDATA[鸡]]></cell>
+    <cell><![CDATA[每袋500克]]></cell>
+    <cell><![CDATA[97.0000]]></cell>
+    <cell><![CDATA[29]]></cell>
+    <cell><![CDATA[0]]></cell>
+    <cell><![CDATA[9]]></cell>
+  </row>
+  <row id='10'>
+    <cell><![CDATA[10]]></cell>
+    <cell><![CDATA[蟹]]></cell>
+    <cell><![CDATA[每袋500克]]></cell>
+    <cell><![CDATA[31.0000]]></cell>
+    <cell><![CDATA[31]]></cell>
+    <cell><![CDATA[0]]></cell>
+    <cell><![CDATA[10]]></cell>
+  </row>
+  <row id='11'>
+    <cell><![CDATA[11]]></cell>
+    <cell><![CDATA[大众奶酪]]></cell>
+    <cell><![CDATA[每袋6包]]></cell>
+    <cell><![CDATA[21.0000]]></cell>
+    <cell><![CDATA[22]]></cell>
+    <cell><![CDATA[30]]></cell>
+    <cell><![CDATA[11]]></cell>
+  </row>
+  <row id='12'>
+    <cell><![CDATA[12]]></cell>
+    <cell><![CDATA[德国奶酪]]></cell>
+    <cell><![CDATA[每箱12瓶]]></cell>
+    <cell><![CDATA[38.0000]]></cell>
+    <cell><![CDATA[86]]></cell>
+    <cell><![CDATA[0]]></cell>
+    <cell><![CDATA[12]]></cell>
+  </row>
+  <row id='13'>
+    <cell><![CDATA[13]]></cell>
+    <cell><![CDATA[龙虾]]></cell>
+    <cell><![CDATA[每袋500克]]></cell>
+    <cell><![CDATA[6.0000]]></cell>
+    <cell><![CDATA[24]]></cell>
+    <cell><![CDATA[0]]></cell>
+    <cell><![CDATA[13]]></cell>
+  </row>
+  <row id='14'>
+    <cell><![CDATA[14]]></cell>
+    <cell><![CDATA[沙茶]]></cell>
+    <cell><![CDATA[每箱12瓶]]></cell>
+    <cell><![CDATA[23.2500]]></cell>
+    <cell><![CDATA[35]]></cell>
+    <cell><![CDATA[0]]></cell>
+    <cell><![CDATA[14]]></cell>
+  </row>
+  <row id='15'>
+    <cell><![CDATA[15]]></cell>
+    <cell><![CDATA[味精]]></cell>
+    <cell><![CDATA[每箱30盒]]></cell>
+    <cell><![CDATA[15.5000]]></cell>
+    <cell><![CDATA[39]]></cell>
+    <cell><![CDATA[0]]></cell>
+    <cell><![CDATA[15]]></cell>
+  </row>
+  <row id='16'>
+    <cell><![CDATA[16]]></cell>
+    <cell><![CDATA[饼干]]></cell>
+    <cell><![CDATA[每箱30盒]]></cell>
+    <cell><![CDATA[17.4500]]></cell>
+    <cell><![CDATA[29]]></cell>
+    <cell><![CDATA[0]]></cell>
+    <cell><![CDATA[16]]></cell>
+  </row>
+  <row id='17'>
+    <cell><![CDATA[17]]></cell>
+    <cell><![CDATA[猪肉]]></cell>
+    <cell><![CDATA[每袋500克]]></cell>
+    <cell><![CDATA[39.0000]]></cell>
+    <cell><![CDATA[0]]></cell>
+    <cell><![CDATA[0]]></cell>
+    <cell><![CDATA[17]]></cell>
+  </row>
+  <row id='18'>
+    <cell><![CDATA[18]]></cell>
+    <cell><![CDATA[墨鱼]]></cell>
+    <cell><![CDATA[每袋500克]]></cell>
+    <cell><![CDATA[62.5000]]></cell>
+    <cell><![CDATA[42]]></cell>
+    <cell><![CDATA[0]]></cell>
+    <cell><![CDATA[18]]></cell>
+  </row>
+  <row id='19'>
+    <cell><![CDATA[19]]></cell>
+    <cell><![CDATA[糖果]]></cell>
+    <cell><![CDATA[每箱30盒]]></cell>
+    <cell><![CDATA[9.2000]]></cell>
+    <cell><![CDATA[25]]></cell>
+    <cell><![CDATA[0]]></cell>
+    <cell><![CDATA[19]]></cell>
+  </row>
+  <row id='20'>
+    <cell><![CDATA[20]]></cell>
+    <cell><![CDATA[桂花糕]]></cell>
+    <cell><![CDATA[每箱30盒]]></cell>
+    <cell><![CDATA[81.0000]]></cell>
+    <cell><![CDATA[40]]></cell>
+    <cell><![CDATA[0]]></cell>
+    <cell><![CDATA[20]]></cell>
+  </row>
+  <row id='21'>
+    <cell><![CDATA[21]]></cell>
+    <cell><![CDATA[花生]]></cell>
+    <cell><![CDATA[每箱30包]]></cell>
+    <cell><![CDATA[10.0000]]></cell>
+    <cell><![CDATA[3]]></cell>
+    <cell><![CDATA[40]]></cell>
+    <cell><![CDATA[21]]></cell>
+  </row>
+  <row id='22'>
+    <cell><![CDATA[22]]></cell>
+    <cell><![CDATA[糯米]]></cell>
+    <cell><![CDATA[每袋3公斤]]></cell>
+    <cell><![CDATA[21.0000]]></cell>
+    <cell><![CDATA[104]]></cell>
+    <cell><![CDATA[0]]></cell>
+    <cell><![CDATA[22]]></cell>
+  </row>
+  <row id='23'>
+    <cell><![CDATA[23]]></cell>
+    <cell><![CDATA[燕麦]]></cell>
+    <cell><![CDATA[每袋3公斤]]></cell>
+    <cell><![CDATA[9.0000]]></cell>
+    <cell><![CDATA[61]]></cell>
+    <cell><![CDATA[0]]></cell>
+    <cell><![CDATA[23]]></cell>
+  </row>
+  <row id='24'>
+    <cell><![CDATA[24]]></cell>
+    <cell><![CDATA[汽水]]></cell>
+    <cell><![CDATA[每箱12瓶]]></cell>
+    <cell><![CDATA[4.5000]]></cell>
+    <cell><![CDATA[20]]></cell>
+    <cell><![CDATA[0]]></cell>
+    <cell><![CDATA[24]]></cell>
+  </row>
+  <row id='25'>
+    <cell><![CDATA[25]]></cell>
+    <cell><![CDATA[巧克力]]></cell>
+    <cell><![CDATA[每箱30盒]]></cell>
+    <cell><![CDATA[14.0000]]></cell>
+    <cell><![CDATA[76]]></cell>
+    <cell><![CDATA[0]]></cell>
+    <cell><![CDATA[25]]></cell>
+  </row>
+</rows>
