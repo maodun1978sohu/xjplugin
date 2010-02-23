@@ -35,6 +35,7 @@ author:xuanye.wan@gmail.com
                 url: false,
                 cbiconpath: "/images/icons/",
                 icons: ["checkbox_0.gif", "checkbox_1.gif", "checkbox_2.gif"],
+				emptyiconpath:"/Themes/Shared/images/s.gif",
                 showcheck: false, //是否显示选择            
                 oncheckboxclick: false, //当checkstate状态变化时所触发的事件，但是不会触发因级联选择而引起的变化
                 onnodeclick: false,
@@ -112,12 +113,12 @@ author:xuanye.wan@gmail.com
             //span indent
             ht.push("<span class='bbit-tree-node-indent'>");
             if (deep == 1) {
-                ht.push("<img class='bbit-tree-icon' src='../../Themes/Shared/images/s.gif'/>");
+                ht.push("<img class='bbit-tree-icon' src='",dfop.emptyiconpath,"'/>");
             }
             else if (deep > 1) {
-                ht.push("<img class='bbit-tree-icon' src='../../Themes/Shared/images/s.gif'/>");
+                ht.push("<img class='bbit-tree-icon' src='",dfop.emptyiconpath,"'/>");
                 for (var j = 1; j < deep; j++) {
-                    ht.push("<img class='bbit-tree-elbow-line' src='../../Themes/Shared/images/s.gif'/>");
+                    ht.push("<img class='bbit-tree-elbow-line' src='",dfop.emptyiconpath,"'/>");
                 }
             }
             ht.push("</span>");
@@ -134,8 +135,8 @@ author:xuanye.wan@gmail.com
             else {
                 cs.push(isend ? "bbit-tree-elbow-end" : "bbit-tree-elbow");
             }
-            ht.push("<img class='bbit-tree-ec-icon ", cs.join(" "), "' src='../../Themes/Shared/images/s.gif'/>");
-            ht.push("<img class='bbit-tree-node-icon' src='../../Themes/Shared/images/s.gif'/>");
+            ht.push("<img class='bbit-tree-ec-icon ", cs.join(" "), "' src='",dfop.emptyiconpath,"'/>");
+            ht.push("<img class='bbit-tree-node-icon' src='",dfop.emptyiconpath,"'/>");
             //checkbox
             if (dfop.showcheck && nd.showcheck) {
                 if (nd.checkstate == null || nd.checkstate == undefined) {
