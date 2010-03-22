@@ -6,14 +6,15 @@
     <link href="/Themes/Default/main.css" rel="stylesheet" type="text/css" />
     <link href="/Themes/Default/flexigrid.css" rel="stylesheet" type="text/css" />    
     <link href="/Themes/Default/contextmenu.css" rel="stylesheet" type="text/css" />
-    <link href="/Themes/Shared/blackbird.css" rel="stylesheet" type="text/css" />  
+    <link href="/Themes/Shared/blackbird.css" rel="stylesheet" type="text/css" />
+
 </head>
 <body>
     <div> 
       
         <div id="ptable" style="margin:10px">
          <table id="productlist" style="display:none"></table>
-        </div>  
+        </div>   
         
     </div>
     <!--如果是部署到虚拟目录的项目，请使用Url.Content()-->
