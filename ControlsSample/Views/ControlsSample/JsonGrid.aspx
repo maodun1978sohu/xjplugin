@@ -52,7 +52,9 @@
                 useRp: false,
                 rowbinddata: true,
                 showcheckbox: true,
-                rowhandler: contextmenu
+                rowhandler: contextmenu,
+				selectedonclick: true,
+                singleselected:false
             };
             var grid = $("#productlist").flexigrid(option);
             /*
