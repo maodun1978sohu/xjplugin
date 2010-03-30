@@ -40,9 +40,11 @@
             onChangeSort: false, //当改变排序时
             onSuccess: false, //成功后执行
             onSubmit: false, // using a custom populate function,调用自定义的计算函数
-            showcheckbox: false, //是否显示checkbox       
+            showcheckbox: false, //是否显示checkbox    
+            singleselected:false, //是否单选
             rowhandler: false, //是否启用行的扩展事情功能
             rowbinddata: false,
+            selectedonclick:false, //点击行是否选中
             extParam: {},
             //Style
             gridClass: "bbit-grid",
@@ -72,7 +74,7 @@
                 $('thead tr:first th:visible', this.hDiv).each(function() {
                     if ($(this).css("display") == "none") {
                         return;
-                    }
+                    }                  
                     var n = i;
                     //var n = $('thead tr:first th:visible', g.hDiv).index(this);			 	  
                     var cdpos = parseInt($('div', this).width());
@@ -117,7 +119,7 @@
             dragStart: function(dragtype, e, obj) { //default drag function start
 
                 if (dragtype == 'colresize') //column resize
-                {                    
+                {
                     $(g.nDiv).hide(); $(g.nBtn).hide();
                     var n = $('div', this.cDrag).index(obj);
                     //var ow = $('th:visible div:eq(' + n + ')', this.hDiv).width();
@@ -220,11 +222,10 @@
 
             },
             dragEnd: function() {
-                if (this.colresize) {                  
+                if (this.colresize) {
                     var n = this.colresize.n;
                     var nw = this.colresize.nw;
                     //$('th:visible div:eq(' + n + ')', this.hDiv).css('width', nw);
-                   
                     $('th:visible:eq(' + n + ') div', this.hDiv).css('width', nw);
 
                     $('tr', this.bDiv).each(
@@ -327,7 +328,7 @@
             }
             ,
             addData: function(data) { //parse data  
-                log.trace("将数据转换成table开始");
+			    log.trace("将数据转换成table开始");
                 if (p.preProcess)
                 { data = p.preProcess(data); }
                 $('.pReload', this.pDiv).removeClass('loading');
@@ -510,7 +511,8 @@
                 if (p.hideOnSubmit) $(g.block).remove(); //$(t).show();
                 this.hDiv.scrollLeft = this.bDiv.scrollLeft;
                 if ($.browser.opera) $(t).css('visibility', 'visible');
-                log.diff("将数据转换成table结束");
+				 log.diff("将数据转换成table结束");
+
             },
             changeSort: function(th) { //change sortorder
 
@@ -582,11 +584,10 @@
                 if (p.extParam) {
                     for (var pi = 0; pi < p.extParam.length; pi++) param[param.length] = p.extParam[pi];
                 }
-
-
+                var purl = p.url + (p.url.indexOf('?') > -1 ? '&' : '?') + '_=' + (new Date()).valueOf();
                 $.ajax({
                     type: p.method,
-                    url: p.url,
+                    url: purl,
                     data: param,
                     dataType: p.dataType,
                     success: function(data) { if (data != null && data.error != null) { if (p.onError) { p.onError(data); g.hideLoading(); } } else { g.addData(data); } },
@@ -701,10 +702,20 @@
             },
             getCheckedRows: function() {
                 var ids = [];
-                $(":checkbox:checked", g.bDiv).each(function() {
+                $("input.itemchk:checked", g.bDiv).each(function() {
                     ids.push($(this).val());
                 });
                 return ids;
+            },
+            getSelectedRows: function() {
+                var items = [];
+                if(!p.rowbinddata){
+                   alert("请将属性rowbinddata设置为true");
+                }
+                $("tr.trSelected", g.bDiv).each(function() {
+                    items.push($(this).attr("ch").split('_FG$SP_'));
+                });
+                return items;
             },
             getCellDim: function(obj) // get cell prop for editable event
             {
@@ -726,24 +737,52 @@
                     $(this).hover(function() { $(this).addClass('trOver'); }, function() { $(this).removeClass('trOver'); });
                 }
             },
+            checkhandler:function()
+            {
+                var $t = $(this);
+                var $ck = $("input.itemchk", this);
+                if(p.singleselected)
+                {
+                    $t.parent().find("tr.trSelected").each(function(e){
+                        if(this !=$t[0])
+                        {
+                            $(this).removeClass("trSelected");
+                        }
+                        $("input.itemchk", this).each(function(e){this.checked =false;});
+                    });
+                }
+                if($t.hasClass("trSelected"))
+                {
+                    $ck.length>0 && ($ck[0].checked=false);
+                    $t.removeClass("trSelected");
+                }
+                else{
+                     $ck.length>0 && ($ck[0].checked =true);
+                     $t.addClass("trSelected");
+                }                
+            },
             addRowProp: function() {
                 var $gF = this.rowProp;
+                var $cf = this.checkhandler;
                 $('tbody tr', g.bDiv).each(
                     function() {
-                        $("input.itemchk", this).each(function() {
-                            var ptr = $(this).parent().parent().parent();
-                            $(this).click(function() {
-                                if (this.checked) {
-                                    ptr.addClass("trSelected");
-                                }
-                                else {
-                                    ptr.removeClass("trSelected");
-                                }
-                                if (p.onrowchecked) {
-                                    p.onrowchecked.call(this);
-                                }
+                        if(p.showcheckbox)
+                        {
+                            $("input.itemchk", this).each(function() {                               
+                                $(this).click(function(e) {                                    
+                                    var ptr = $(this).parent().parent().parent();
+                                    $cf.call(ptr);
+                                    if (p.onrowchecked) {
+                                        p.onrowchecked.call(this);
+                                    }
+                                    e.stopPropagation();                             
+                                });
                             });
-                        });
+                        }
+                        if(p.selectedonclick) //点击切换选中状态
+                        {
+                            $(this).click($cf);
+                        }
                         $gF.call(this);
                     }
                 );
@@ -778,7 +817,10 @@
             if (p.showcheckbox) {
                 var cth = jQuery('<th/>');
                 var cthch = jQuery('<input type="checkbox"/>');
-                cthch.addClass("noborder")
+                cthch.addClass("noborder");
+                if(p.singleselected){
+                    cthch.attr("disabled",true).css("visibility","hidden");
+                }
                 cth.addClass("cth").attr({ 'axis': "col-1", width: "15", "isch": true }).append(cthch);
                 $(tr).append(cth);
             }
@@ -804,7 +846,7 @@
                     th.hide = true;
                 }
                 if (cm.toggle != undefined) {
-                    th.toggle = cm.toggle
+                    th.toggle = cm.toggle;
                 }
                 if (cm.process) {
                     th.process = cm.process;
@@ -1035,7 +1077,7 @@
         $(t).before(g.bDiv);
         $(g.bDiv)
 		.css({ height: (p.height == 'auto') ? 'auto' : p.height + "px" })
-		.scroll(function(e) { g.scroll() })
+		.scroll(function(e) { g.scroll(); })
 		.append(t)
 		;
 
@@ -1088,9 +1130,9 @@
 			 	        $(cgDiv).hover(
 								function() {
 								    g.fixHeight();
-								    $(this).addClass('dragging')
+								    $(this).addClass('dragging');
 								},
-								function() { if (!g.colresize) $(this).removeClass('dragging') }
+								function() { if (!g.colresize) $(this).removeClass('dragging'); }
 							);
 			 	    }
 			 	}
@@ -1109,7 +1151,7 @@
         if (p.resizable && p.height != 'auto') {
             g.vDiv.className = 'vGrip';
             $(g.vDiv)
-		.mousedown(function(e) { g.dragStart('vresize', e) })
+		.mousedown(function(e) { g.dragStart('vresize', e); })
 		.html('<span></span>');
             $(g.bDiv).after(g.vDiv);
         }
@@ -1135,12 +1177,12 @@
             var html = '<div class="pGroup"><div class="pFirst pButton" title="转到第一页"><span></span></div><div class="pPrev pButton" title="转到上一页"><span></span></div> </div><div class="btnseparator"></div> <div class="pGroup"><span class="pcontrol">当前 <input type="text" size="1" value="1" /> ,总页数 <span> 1 </span></span></div><div class="btnseparator"></div><div class="pGroup"> <div class="pNext pButton" title="转到下一页"><span></span></div><div class="pLast pButton" title="转到最后一页"><span></span></div></div><div class="btnseparator"></div><div class="pGroup"> <div class="pReload pButton" title="刷新"><span></span></div> </div> <div class="btnseparator"></div><div class="pGroup"><span class="pPageStat"></span></div>';
             $('div', g.pDiv).html(html);
 
-            $('.pReload', g.pDiv).click(function() { g.populate() });
-            $('.pFirst', g.pDiv).click(function() { g.changePage('first') });
-            $('.pPrev', g.pDiv).click(function() { g.changePage('prev') });
-            $('.pNext', g.pDiv).click(function() { g.changePage('next') });
-            $('.pLast', g.pDiv).click(function() { g.changePage('last') });
-            $('.pcontrol input', g.pDiv).keydown(function(e) { if (e.keyCode == 13) g.changePage('input') });
+            $('.pReload', g.pDiv).click(function() { g.populate(); });
+            $('.pFirst', g.pDiv).click(function() { g.changePage('first'); });
+            $('.pPrev', g.pDiv).click(function() { g.changePage('prev'); });
+            $('.pNext', g.pDiv).click(function() { g.changePage('next'); });
+            $('.pLast', g.pDiv).click(function() { g.changePage('last'); });
+            $('.pcontrol input', g.pDiv).keydown(function(e) { if (e.keyCode == 13) g.changePage('input'); });
             if ($.browser.msie && $.browser.version < 7) $('.pButton', g.pDiv).hover(function() { $(this).addClass('pBtnOver'); }, function() { $(this).removeClass('pBtnOver'); });
 
             if (p.useRp) {
@@ -1192,7 +1234,7 @@
 
                 $(g.sDiv).append("<div class='sDiv2'>快速检索：<input type='text' size='30' name='q' class='qsbox' /> <select name='qtype'>" + sopt + "</select> <input type='button' name='qclearbtn' value='清空' /></div>");
 
-                $('input[name=q],select[name=qtype]', g.sDiv).keydown(function(e) { if (e.keyCode == 13) g.doSearch() });
+                $('input[name=q],select[name=qtype]', g.sDiv).keydown(function(e) { if (e.keyCode == 13) g.doSearch(); });
                 $('input[name=qclearbtn]', g.sDiv).click(function() { $('input[name=q]', g.sDiv).val(''); p.query = ''; g.doSearch(); });
                 $(g.bDiv).after(g.sDiv);
 
@@ -1343,9 +1385,9 @@
 
         //add document events
         $(document)
-		.mousemove(function(e) { g.dragMove(e) })
-		.mouseup(function(e) { g.dragEnd() })
-		.hover(function() { }, function() { g.dragEnd() })
+		.mousemove(function(e) { g.dragMove(e); })
+		.mouseup(function(e) { g.dragEnd(); })
+		.hover(function() { }, function() { g.dragEnd(); })
 		;
 
         //browser adjustments
@@ -1411,14 +1453,14 @@
                 this.grid.reSize();
             }
         });
-    }
+    };
     $.fn.ChangePage = function(type) {
         return this.each(function() {
             if (this.grid) {
                 this.grid.changePage(type);
             }
         })
-    }
+    };
     $.fn.flexOptions = function(p) { //function to update general options
 
         return this.each(function() {
@@ -1431,13 +1473,21 @@
             return this[0].p;
         }
         return null;
-    }
+    };
+    // 获取选中的行，返回选中行的主键
     $.fn.getCheckedRows = function() {
         if (this[0].grid) {
             return this[0].grid.getCheckedRows();
         }
         return [];
-    }
+    };
+    // 获取选中的行，返回选中行的所有数据
+    $.fn.getSelectedRows = function() {
+        if (this[0].grid) {
+            return this[0].grid.getSelectedRows();
+        }
+        return [];
+    };
     $.fn.flexToggleCol = function(cid, visible) { // function to reload grid
 
         return this.each(function() {
@@ -1482,7 +1532,7 @@
                 else $(this).removeAttr('unselectable', 'on');
             });
 
-        }
+        };
 
     }; //end noSelect
 

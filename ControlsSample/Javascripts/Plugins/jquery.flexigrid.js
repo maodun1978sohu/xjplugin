@@ -1,4 +1,4 @@
-/// <reference path="../intellisense/jquery-1.2.6-vsdoc-cn.js" />
+﻿/// <reference path="../intellisense/jquery-1.2.6-vsdoc-cn.js" />
 /// <reference path="../lib/blackbird.js" />
 (function($) {
     $.addFlex = function(t, p) {
@@ -40,9 +40,11 @@
             onChangeSort: false, //当改变排序时
             onSuccess: false, //成功后执行
             onSubmit: false, // using a custom populate function,调用自定义的计算函数
-            showcheckbox: false, //是否显示checkbox       
+            showcheckbox: false, //是否显示checkbox    
+            singleselected:false, //是否单选
             rowhandler: false, //是否启用行的扩展事情功能
             rowbinddata: false,
+            selectedonclick:false, //点击行是否选中
             extParam: {},
             //Style
             gridClass: "bbit-grid",
@@ -72,8 +74,7 @@
                 $('thead tr:first th:visible', this.hDiv).each(function() {
                     if ($(this).css("display") == "none") {
                         return;
-                    }
-
+                    }                  
                     var n = i;
                     //var n = $('thead tr:first th:visible', g.hDiv).index(this);			 	  
                     var cdpos = parseInt($('div', this).width());
@@ -329,15 +330,11 @@
             addData: function(data) { //parse data                
                 if (p.preProcess)
                 { data = p.preProcess(data); }
-                if (p.usepager) {
-                    $('.pReload', this.pDiv).removeClass('loading');
-                }
+                $('.pReload', this.pDiv).removeClass('loading');
                 this.loading = false;
 
                 if (!data) {
-                    if (p.usepager) {
-                        $('.pPageStat', this.pDiv).html(p.errormsg);
-                    }
+                    $('.pPageStat', this.pDiv).html(p.errormsg);
                     return false;
                 }
                 var temp = p.total;
@@ -367,9 +364,9 @@
                 { p.page = +$('rows page', data).text(); }
                 else
                 { p.page = data.page; }
-                if (p.usepager) {
-                    this.buildpager();
-                }
+                this.buildpager();
+
+
 
                 var ths = $('thead tr:first th', g.hDiv);
                 var thsdivs = $('thead tr:first th div', g.hDiv);
@@ -585,11 +582,10 @@
                 if (p.extParam) {
                     for (var pi = 0; pi < p.extParam.length; pi++) param[param.length] = p.extParam[pi];
                 }
-
-
+                var purl = p.url + (p.url.indexOf('?') > -1 ? '&' : '?') + '_=' + (new Date()).valueOf();
                 $.ajax({
                     type: p.method,
-                    url: p.url,
+                    url: purl,
                     data: param,
                     dataType: p.dataType,
                     success: function(data) { if (data != null && data.error != null) { if (p.onError) { p.onError(data); g.hideLoading(); } } else { g.addData(data); } },
@@ -704,10 +700,20 @@
             },
             getCheckedRows: function() {
                 var ids = [];
-                $(":checkbox:checked", g.bDiv).each(function() {
+                $("input.itemchk:checked", g.bDiv).each(function() {
                     ids.push($(this).val());
                 });
                 return ids;
+            },
+            getSelectedRows: function() {
+                var items = [];
+                if(!p.rowbinddata){
+                   alert("请将属性rowbinddata设置为true");
+                }
+                $("tr.trSelected", g.bDiv).each(function() {
+                    items.push($(this).attr("ch").split('_FG$SP_'));
+                });
+                return items;
             },
             getCellDim: function(obj) // get cell prop for editable event
             {
@@ -729,24 +735,52 @@
                     $(this).hover(function() { $(this).addClass('trOver'); }, function() { $(this).removeClass('trOver'); });
                 }
             },
+            checkhandler:function()
+            {
+                var $t = $(this);
+                var $ck = $("input.itemchk", this);
+                if(p.singleselected)
+                {
+                    $t.parent().find("tr.trSelected").each(function(e){
+                        if(this !=$t[0])
+                        {
+                            $(this).removeClass("trSelected");
+                        }
+                        $("input.itemchk", this).each(function(e){this.checked =false;});
+                    });
+                }
+                if($t.hasClass("trSelected"))
+                {
+                    $ck.length>0 && ($ck[0].checked=false);
+                    $t.removeClass("trSelected");
+                }
+                else{
+                     $ck.length>0 && ($ck[0].checked =true);
+                     $t.addClass("trSelected");
+                }                
+            },
             addRowProp: function() {
                 var $gF = this.rowProp;
+                var $cf = this.checkhandler;
                 $('tbody tr', g.bDiv).each(
                     function() {
-                        $("input.itemchk", this).each(function() {
-                            var ptr = $(this).parent().parent().parent();
-                            $(this).click(function() {
-                                if (this.checked) {
-                                    ptr.addClass("trSelected");
-                                }
-                                else {
-                                    ptr.removeClass("trSelected");
-                                }
-                                if (p.onrowchecked) {
-                                    p.onrowchecked.call(this);
-                                }
+                        if(p.showcheckbox)
+                        {
+                            $("input.itemchk", this).each(function() {                               
+                                $(this).click(function(e) {                                    
+                                    var ptr = $(this).parent().parent().parent();
+                                    $cf.call(ptr);
+                                    if (p.onrowchecked) {
+                                        p.onrowchecked.call(this);
+                                    }
+                                    e.stopPropagation();                             
+                                });
                             });
-                        });
+                        }
+                        if(p.selectedonclick) //点击切换选中状态
+                        {
+                            $(this).click($cf);
+                        }
                         $gF.call(this);
                     }
                 );
@@ -782,6 +816,9 @@
                 var cth = jQuery('<th/>');
                 var cthch = jQuery('<input type="checkbox"/>');
                 cthch.addClass("noborder");
+                if(p.singleselected){
+                    cthch.attr("disabled",true).css("visibility","hidden");
+                }
                 cth.addClass("cth").attr({ 'axis': "col-1", width: "15", "isch": true }).append(cthch);
                 $(tr).append(cth);
             }
@@ -1435,9 +1472,17 @@
         }
         return null;
     };
+    // 获取选中的行，返回选中行的主键
     $.fn.getCheckedRows = function() {
         if (this[0].grid) {
             return this[0].grid.getCheckedRows();
+        }
+        return [];
+    };
+    // 获取选中的行，返回选中行的所有数据
+    $.fn.getSelectedRows = function() {
+        if (this[0].grid) {
+            return this[0].grid.getSelectedRows();
         }
         return [];
     };

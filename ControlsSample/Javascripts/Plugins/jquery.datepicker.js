@@ -138,7 +138,7 @@
         function initevents() {
             //1 today btn;
             $("#BBIT-DP-TODAY").click(returntoday);
-            cp.click(returnfalse);
+            cp.click(returnfalse).bind("resetdefdate", resetdefdate);
             $("#BBIT_DP_INNER tbody").click(tbhandler);
             $("#BBIT_DP_LEFTBTN").click(prevm);
             $("#BBIT_DP_RIGHTBTN").click(nextm);
@@ -149,6 +149,7 @@
             $("#BBIT-DP-MP-NEXT").click(mpnexty);
             $("#BBIT-DP-MP-OKBTN").click(mpok);
             $("#BBIT-DP-MP-CANCELBTN").click(mpcancel);
+
         }
         function mpcancel() {
             $("#BBIT-DP-MP").animate({ top: -193 }, { duration: 200, complete: function() { $("#BBIT-DP-MP").hide(); } });
@@ -163,13 +164,13 @@
             return false;
         }
         function mpprevy() {
-            var y = def.ty - 10
+            var y = def.ty - 10;
             def.ty = y;
             rryear(y);
             return false;
         }
         function mpnexty() {
-            var y = def.ty + 10
+            var y = def.ty + 10;
             def.ty = y;
             rryear(y);
             return false;
@@ -215,7 +216,7 @@
                     if (ctd.length > 0) {
                         ctd.removeClass("bbit-dp-mp-sel");
                     }
-                    $(td).addClass("bbit-dp-mp-sel")
+                    $(td).addClass("bbit-dp-mp-sel");
                     def.cm = parseInt($(td).attr("xmonth"));
                 }
             }
@@ -225,7 +226,7 @@
                     if (ctd.length > 0) {
                         ctd.removeClass("bbit-dp-mp-sel");
                     }
-                    $(td).addClass("bbit-dp-mp-sel")
+                    $(td).addClass("bbit-dp-mp-sel");
                     def.cy = parseInt($(td).attr("xyear"));
                 }
             }
@@ -288,7 +289,21 @@
         function returnfalse() {
             return false;
         }
+        function resetdefdate() {
+            var ndate = cp.data("indata");
+            if (ndate != null) {
+                def.Year = ndate.getFullYear();
+                def.Month = ndate.getMonth() + 1;
+                def.Day = ndate.getDate();
+            }
+            else {
+                def.Year = new Date().getFullYear();
+                def.Month = new Date().getMonth() + 1;
+                def.Day = new Date().getDate();
+            }
+        }
         function prevm() {
+            //resetdefdate();
             if (def.Month == 1) {
                 def.Year--;
                 def.Month = 12;
@@ -300,6 +315,7 @@
             return false;
         }
         function nextm() {
+            //resetdefdate();
             if (def.Month == 12) {
                 def.Year++;
                 def.Month = 1;
@@ -318,7 +334,7 @@
             var ct = cp.data("ctarget");
             var ck = cp.data("cpk");
             var re = cp.data("onReturn");
-            var ndate = cp.data("indata")
+            var ndate = cp.data("indata");
             var ads = cp.data("ads");
             var ade = cp.data("ade");
             var dis = false;
@@ -440,6 +456,7 @@
                     def.inputDate = new Date(def.Year, def.Month - 1, def.Day);
                 }
                 cp.data("ctarget", obj).data("cpk", me).data("indata", def.inputDate).data("onReturn", def.onReturn);
+                cp.trigger("resetdefdate");
                 if (def.applyrule && $.isFunction(def.applyrule)) {
                     var rule = def.applyrule.call(obj, obj[0].id);
                     if (rule) {
