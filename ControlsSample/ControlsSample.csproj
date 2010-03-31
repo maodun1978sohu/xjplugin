@@ -149,7 +149,6 @@
     <Content Include="Javascripts\common.js" />
     <Content Include="Javascripts\intellisense\jquery-1.2.6-vsdoc-cn.js" />
     <Content Include="Javascripts\intellisense\jquery-1.3.2-vsdoc.js" />
-    <Content Include="Javascripts\jquery-1.2.6.js" />
     <Content Include="Javascripts\jquery.js" />
     <Content Include="Javascripts\lib\blackbird.js" />
     <Content Include="Javascripts\lib\jquery.hotkeys.js" />
@@ -287,6 +286,8 @@
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Javascripts\jquery-1.4.2.js" />
+    <Content Include="Javascripts\jquery-1.4.2.min.js" />
     <Content Include="SampleData\page1.js" />
     <Content Include="SampleData\page2.js" />
     <Content Include="SampleData\page3.js" />
