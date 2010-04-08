@@ -1,5 +1,5 @@
 ﻿/// <reference path="../intellisense/jquery-1.2.6-vsdoc-cn.js" />
-/// <reference path="../lib/blackbird.js" />
+/// <reference path="../lib/blackbird.js" /> 
 (function($) {
     $.addFlex = function(t, p) {
         if (t.grid) return false; //如果Grid已经存在则返回
