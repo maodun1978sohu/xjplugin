@@ -1,4 +1,4 @@
-﻿/// <reference path="../intellisense/jquery-1.2.6-vsdoc-cn.js" />
+﻿/// <reference path="../intellisense/jquery-1.2.6-vsdoc-cn.js" /> 
 (function($) {
     var userAgent = window.navigator.userAgent.toLowerCase();
     $.browser.msie8 = $.browser.msie && /msie 8\.0/i.test(userAgent);
