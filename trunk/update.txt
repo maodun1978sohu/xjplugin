@@ -15,3 +15,6 @@ Flexigrid
 
 2010-03-19
 1:修正了datepicker之间上下月按钮事件互相影响的问题
+
+2010-4-12
+1修正了Flexigrid在Firefox下 获取选中行数据方法getSelectedRow的问题。 
