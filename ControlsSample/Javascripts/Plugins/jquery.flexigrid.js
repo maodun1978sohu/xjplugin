@@ -711,7 +711,7 @@
                    alert("请将属性rowbinddata设置为true");
                 }
                 $("tr.trSelected", g.bDiv).each(function() {
-                    items.push($(this).attr("ch").split('_FG$SP_'));
+                    items.push($(this).attr("CH").split('_FG$SP_'));
                 });
                 return items;
             },
