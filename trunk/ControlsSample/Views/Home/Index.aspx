@@ -51,7 +51,7 @@
   
     
     <script type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(function() {            
             var op = { data: menudata, onnodeclick: navi, theme: "bbit-tree-lines" };
             $("#left").treeview(op);
             function navi(item) {
