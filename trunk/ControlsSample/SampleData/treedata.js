@@ -121,7 +121,23 @@
             complete: true,
             ChildNodes: null
 }]
-        },
+},
+            {
+                id: "0.1.6",
+                text: "选项卡",
+                hasChildren: true,
+                isexpand: false,
+                complete: true,
+                ChildNodes: [{
+                    id: "0.1.6.1",
+                    text: "TabPanel",
+                    value: "/ControlsSample/TabPanel",
+                    hasChildren: false,
+                    isexpand: false,
+                    complete: true,
+                    ChildNodes: null
+}]
+                },
     {
         id: "0.1.5",
         text: "智能选择 ",
