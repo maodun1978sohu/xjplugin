@@ -18,3 +18,7 @@ Flexigrid
 
 2010-4-12
 1修正了Flexigrid在Firefox下 获取选中行数据方法getSelectedRow的问题。 
+
+
+2010-05-21
+1: 新增 TabPanel 控件

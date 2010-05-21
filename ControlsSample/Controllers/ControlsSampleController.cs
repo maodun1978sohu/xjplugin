@@ -152,6 +152,11 @@ namespace ControlsSample.Controllers
             return Json(data);
         }
 
+        public ActionResult TabPanel()
+        {
+            return View();
+        }
+
         /// <summary>
         /// Gets the tree root.
         /// </summary>

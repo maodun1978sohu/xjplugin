@@ -288,12 +288,26 @@
   <ItemGroup>
     <Content Include="Javascripts\jquery-1.4.2.js" />
     <Content Include="Javascripts\jquery-1.4.2.min.js" />
+    <Content Include="Javascripts\Plugins\jquery.tabpanel.js" />
     <Content Include="SampleData\page1.js" />
     <Content Include="SampleData\page2.js" />
     <Content Include="SampleData\page3.js" />
     <Content Include="SampleData\page4.js" />
     <Content Include="Themes\Default\images\flexigrid\grid3-special-col-bg.gif" />
     <Content Include="Themes\Default\images\flexigrid\grid3-special-col-sel-bg.gif" />
+    <Content Include="Themes\Default\images\tabpanel\scroll-left.gif" />
+    <Content Include="Themes\Default\images\tabpanel\scroll-right.gif" />
+    <Content Include="Themes\Default\images\tabpanel\scroller-bg.gif" />
+    <Content Include="Themes\Default\images\tabpanel\tab-btm-inactive-left-bg.gif" />
+    <Content Include="Themes\Default\images\tabpanel\tab-btm-inactive-right-bg.gif" />
+    <Content Include="Themes\Default\images\tabpanel\tab-btm-left-bg.gif" />
+    <Content Include="Themes\Default\images\tabpanel\tab-btm-right-bg.gif" />
+    <Content Include="Themes\Default\images\tabpanel\tab-close.gif" />
+    <Content Include="Themes\Default\images\tabpanel\tab-strip-bg.gif" />
+    <Content Include="Themes\Default\images\tabpanel\tab-strip-bg.png" />
+    <Content Include="Themes\Default\images\tabpanel\tab-strip-btm-bg.gif" />
+    <Content Include="Themes\Default\images\tabpanel\tabs-sprite.gif" />
+    <Content Include="Themes\Default\tabpanel.css" />
     <Content Include="Themes\old\flexigrid.css" />
     <Content Include="Themes\old\images\bg.gif" />
     <Content Include="Themes\old\images\btn-sprite.gif" />
@@ -312,6 +326,7 @@
     <Content Include="Themes\old\images\up.png" />
     <Content Include="Themes\old\images\uup.png" />
     <Content Include="Themes\old\images\wbg.gif" />
+    <Content Include="Views\ControlsSample\TabPanel.aspx" />
     <Content Include="Views\ControlsSample\TwoGridInOnePage.aspx" />
   </ItemGroup>
   <ItemGroup>
@@ -333,7 +348,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>2391</DevelopmentServerPort>
+          <DevelopmentServerPort>2293</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
