@@ -7,3 +7,12 @@ H:\Temp\ControlsSample\bin\System.Web.Abstractions.dll
 H:\Temp\ControlsSample\bin\System.Web.Mvc.dll
 H:\Temp\ControlsSample\bin\System.Web.Routing.dll
 H:\Temp\ControlsSample\bin\System.Web.Mvc.xml
+H:\Temp\MyOpenSourceProject\xjPlugin\ControlsSample\bin\ControlsSample.dll
+H:\Temp\MyOpenSourceProject\xjPlugin\ControlsSample\bin\ControlsSample.pdb
+H:\Temp\MyOpenSourceProject\xjPlugin\ControlsSample\bin\System.Web.Abstractions.dll
+H:\Temp\MyOpenSourceProject\xjPlugin\ControlsSample\bin\System.Web.Mvc.dll
+H:\Temp\MyOpenSourceProject\xjPlugin\ControlsSample\bin\System.Web.Routing.dll
+H:\Temp\MyOpenSourceProject\xjPlugin\ControlsSample\bin\System.Web.Mvc.xml
+H:\Temp\MyOpenSourceProject\xjPlugin\ControlsSample\obj\Debug\ResolveAssemblyReference.cache
+H:\Temp\MyOpenSourceProject\xjPlugin\ControlsSample\obj\Debug\ControlsSample.dll
+H:\Temp\MyOpenSourceProject\xjPlugin\ControlsSample\obj\Debug\ControlsSample.pdb
