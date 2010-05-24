@@ -1,4 +1,4 @@
-﻿/// <reference path="../intellisense/jquery-1.4.1-vsdoc.js" />
+/// <reference path="../intellisense/jquery-1.4.1-vsdoc.js" />
 ; (function ($) {
     $.fn.tabpanel =function(option){
         var dfop ={

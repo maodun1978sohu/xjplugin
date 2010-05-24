@@ -16,8 +16,8 @@
     <script src="../../Javascripts/Plugins/jquery.tabpanel.js" type="text/javascript"></script>
       <script type="text/javascript">
           $(document).ready(function(e) {
-              var items = [{ id: "home", text: "Ö÷Ò³", classes: "icon_home", isactive: true, content: "»¶Ó­¹âÁÙ" },
-            { id: "baidu", text: "°Ù¶È", closeable: true, url: "http://www.baidu.com/" },
+              var items = [{ id: "home", text: "ä¸»é¡µ", classes: "icon_home", isactive: true, content: "æ¬¢è¿å…‰ä¸´" },
+            { id: "baidu", text: "ç™¾åº¦", closeable: true, url: "http://www.baidu.com/" },
             { id: "tab3", text: "tab3", disabled: true, content: "tab3" },
             { id: "tab4", text: "tab4", closeable: true, cuscall: tabitem_cuscall },
             { id: "tab5", text: "tab5", closeable: true, content: "tab5", onactive: tabitem_onactive },
@@ -36,12 +36,12 @@
               $("#btnopenhometab").click(function(e) {
                   $("#tabs").opentabitem({ id: "home" });
               });
-              function tabitem_cuscall(item, contenpanel) { //contenpanel ¼´tab body µÄÈİÆ÷£¬Èç¹ûÊÇÒì²½·½·¨£¬¿ÉÍ¨¹ı´ËÊôĞÔÌî³ä·µ»ØÊı¾İ
-                  //contenpanel.html("ÎÒÊÇ×Ô¶¨ÒåÏÔÊ¾µÄÄÚÈİ"); //´ËÓÃ·¨ºÍÏÂÃæÒ»¸öĞ§¹ûÒ»Ñù
-                  return "ÎÒÊÇ×Ô¶¨ÒåÏÔÊ¾µÄÄÚÈİ";
+              function tabitem_cuscall(item, contenpanel) { //contenpanel å³tab body çš„å®¹å™¨ï¼Œå¦‚æœæ˜¯å¼‚æ­¥æ–¹æ³•ï¼Œå¯é€šè¿‡æ­¤å±æ€§å¡«å……è¿”å›æ•°æ®
+                  //contenpanel.html("æˆ‘æ˜¯è‡ªå®šä¹‰æ˜¾ç¤ºçš„å†…å®¹"); //æ­¤ç”¨æ³•å’Œä¸‹é¢ä¸€ä¸ªæ•ˆæœä¸€æ ·
+                  return "æˆ‘æ˜¯è‡ªå®šä¹‰æ˜¾ç¤ºçš„å†…å®¹";
               }
               function tabitem_onactive(item) {
-                  alert("ÎÒÊÇ" + item.text);
+                  alert("æˆ‘æ˜¯" + item.text);
               }
               $("#btnresize").click(function(e) {
                   $("#tabs").resizetabpanel(600, 500);
@@ -55,8 +55,8 @@
         </div>
         <div>
             <button id="btnaddtab">add tab</button>
-            <button id="btnopenhometab">Ñ¡ÖĞHome</button>
-            <button id="btnresize">ÖØĞÂÉè¶¨´óĞ¡Îª600*500</button>
+            <button id="btnopenhometab">é€‰ä¸­Home</button>
+            <button id="btnresize">é‡æ–°è®¾å®šå¤§å°ä¸º600*500</button>
         </div>
     </div>
 </body>
