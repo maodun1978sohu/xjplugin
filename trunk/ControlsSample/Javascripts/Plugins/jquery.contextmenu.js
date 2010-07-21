@@ -151,7 +151,7 @@ option: {width:Number, items:Array, onShow:Function, rule:JSON}
         /** 右键菜单显示 */
         function showMenu(e, menutarget) {
             target = menutarget;
-            showMenuGroup.call(groups.cmroot, { left: e.pageX, top: e.pageY }, 0);
+            showMenuGroup.call(groups[this.id], { left: e.pageX, top: e.pageY }, 0);
             $(document).one('mousedown', hideMenuPane);
         }
         var $root = $("#" + option.alias);

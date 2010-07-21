@@ -68,6 +68,19 @@
                 return this.id != "target3";
             }
             $("#target,#target2,#target3").contextmenu(option);
+
+            var option2 = { width: 150,alias:"new", items: [
+                            { text: "第一项", icon: "/images/icons/ico1.gif", alias: "1-1", action: menuAction },
+                            { text: "第二项", icon: "/images/icons/ico2.gif", alias: "1-2", action: menuAction },
+                            { text: "第三项", icon: "/images/icons/ico3.gif", alias: "1-3", action: menuAction },
+                              { text: "组二集合", icon: "/images/icons/ico6.gif", alias: "1-6", type: "group", width: 180, items: [
+	                            { text: "组2一项", icon: "/images/icons/ico6-1.gif", alias: "4-1", action: menuAction },
+	                            { text: "组2二项", icon: "/images/icons/ico6-2.gif", alias: "4-2", action: menuAction }
+                            ]
+                            }                     
+                ]
+            };
+             $("#target4").contextmenu(option2);
         });
     </script>
 </head>
@@ -76,6 +89,7 @@
         <div id="target"  class="target">在这里右击[所有菜单]</div>
         <div id="target2"  class="target" style="left:600px;top:100px;">在这里右击[disable某些项]</div>
         <div id="target3"  class="target" style="left:400px;top:500px;">在这里右击[这个右键不能显示]</div>
+        <div id="target4"  class="target" style="left:300px;top:200px;">第二个右键</div>
 </body>
 </html>
 
