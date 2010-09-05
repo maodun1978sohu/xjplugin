@@ -17,7 +17,7 @@
         
     </div>
     <!--如果是部署到虚拟目录的项目，请使用Url.Content()-->
-    <script src="/Javascripts/jquery.js" type="text/javascript"></script>
+    <script src="/Javascripts/jquery-1.4.2.min.js" type="text/javascript"></script>
     <script src="/Javascripts/Plugins/jquery.flexigrid.trace.js" type="text/javascript"></script> 
     <script src="/Javascripts/Plugins/jquery.contextmenu.js" type="text/javascript"></script>
     <script src="/Javascripts/lib/blackbird.js" type="text/javascript"></script>

@@ -37,8 +37,8 @@
                   $("#tabs").opentabitem({ id: "home" });
               });
               function tabitem_cuscall(item, contenpanel) { //contenpanel 即tab body 的容器，如果是异步方法，可通过此属性填充返回数据
-                  //contenpanel.html("我是自定义显示的内容"); //此用法和下面一个效果一样
-                  return "我是自定义显示的内容";
+                  contenpanel.html("我是自定义显示的内容2"); //此用法和下面一个效果一样
+                  //return "我是自定义显示的内容";
               }
               function tabitem_onactive(item) {
                   alert("我是" + item.text);
