@@ -11,6 +11,8 @@
         <button id="showchecked">获取选中的节点</button>
         <button id="showcurrent">获取当前节点</button>
         <button id="reflashshanghai">刷新上海节点</button>
+        <button id="btnSelectAll">全选</button>
+        <button id="btnUnSelectAll">全不选</button>
     </div>
     <div style="border-bottom: #c3daf9 1px solid; border-left: #c3daf9 1px solid; width: 250px; height: 500px; overflow: auto; border-top: #c3daf9 1px solid; border-right: #c3daf9 1px solid;">
         <div id="tree">
@@ -18,7 +20,7 @@
         </div>
         
     </div>
-     <script src="../../Javascripts/jquery.js" type="text/javascript"></script>
+    <script src="../../Javascripts/jquery.js" type="text/javascript"></script>
     <script src="../../Javascripts/common.js" type="text/javascript"></script>
     <script src="../../Javascripts/Plugins/jquery.tree.js" type="text/javascript"></script>
     <script src="../../SampleData/tree1.js" type="text/javascript"></script>
@@ -51,6 +53,14 @@
              });
             $("#reflashshanghai").click(function(e) {
                 $("#tree").reflash("9"); //9 为节点的ID
+            });
+            //全选
+            $("#btnSelectAll").click(function(e) {
+                $("#tree").checkAll(); 
+            });
+            //全不选
+            $("#btnUnSelectAll").click(function(e) {
+                $("#tree").unCheckAll();
             });
 
         }   
