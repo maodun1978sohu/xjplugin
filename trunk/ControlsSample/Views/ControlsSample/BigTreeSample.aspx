@@ -11,6 +11,10 @@
     <div style="margin-bottom:5px;">
         <button id="showchecked">Get Selected Nodes</button>
         <button id="showcurrent">Get Current Node</button>
+        <button id="btnSelectAll">全选</button>
+        <button id="btnUnSelectAll">全不选</button>
+        <button id="btnSelectSomeCa">选中上海中的市直辖和黑龙江省的哈尔滨市节点（级联）</button>
+        <button id="btnSelectSome">选中上海中的市直辖和黑龙江省的哈尔滨市节点（不级联）</button>
     </div>
     <div style="border-bottom: #c3daf9 1px solid; border-left: #c3daf9 1px solid; width: 250px; height: 500px; overflow: auto; border-top: #c3daf9 1px solid; border-right: #c3daf9 1px solid;">
         <div id="tree">
@@ -45,7 +49,22 @@
                     alert(s.text);
                 else
                     alert("NULL");
-             });
+            });
+            $("#btnSelectAll").click(function(e) {
+                 $("#tree").checkAll();
+            });
+            //全不选
+            $("#btnUnSelectAll").click(function(e) {
+                $("#tree").unCheckAll();
+            });
+            //选中级联
+            $("#btnSelectSomeCa").click(function(e) {
+                $("#tree").setItemsCheckState("75,92",true,true);
+            });
+            //选中不级联
+            $("#btnSelectSome").click(function(e) {
+                $("#tree").setItemsCheckState("75,92",true,false);
+            });
         }   
         if( $.browser.msie6)
         {
