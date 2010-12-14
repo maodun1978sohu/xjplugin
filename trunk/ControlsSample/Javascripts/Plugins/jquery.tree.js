@@ -97,6 +97,7 @@ author:xuanye.wan@gmail.com
         }
         //endregion
         function buildnode(nd, ht, deep, path, isend) {
+            nd.isend = isend;
             var nid = nd.id.replace(/[^\w]/gi, "_");
             ht.push("<li class='bbit-tree-node'>");
             ht.push("<div id='", id, "_", nid, "' tpath='", path, "' unselectable='on' title='", nd.text, "'");
@@ -120,6 +121,7 @@ author:xuanye.wan@gmail.com
                 ht.push("<img class='bbit-tree-icon' src='", dfop.emptyiconpath, "'/>");
                 for (var j = 1; j < deep; j++) {
                     ht.push("<img class='bbit-tree-elbow-line' src='", dfop.emptyiconpath, "'/>");
+
                 }
             }
             ht.push("</span>");
@@ -357,6 +359,14 @@ author:xuanye.wan@gmail.com
                 img.click();
             }
         }
+        function togglebyId(itemId) {
+            var nid = itemId.replace(/[^\w]/gi, "_");
+            var img = $("#" + id + "_" + nid + " img.bbit-tree-ec-icon");
+            if (img.length > 0) {
+                img.click();
+            }
+        }
+
         function asnybuild(nodes, deep, path, ul, pnode) {
             var l = nodes.length;
             if (l > 0) {
@@ -369,6 +379,7 @@ author:xuanye.wan@gmail.com
                 ht = null;
                 InitEvent(ul);
             }
+            //isend?" bbit-tree-node-ct-end":""
             ul.addClass("bbit-tree-node-ct").css({ "z-index": 0, position: "static", visibility: "visible", top: "auto", left: "auto", display: "" });
             ul.prev().removeClass("bbit-tree-node-loading");
         }
@@ -524,6 +535,11 @@ author:xuanye.wan@gmail.com
 
                     }
                 }
+            },
+            toggle: function(itemId) {
+                if (itemId) {
+                    togglebyId(itemId);
+                }
             }
         };
         return me;
@@ -571,6 +587,12 @@ author:xuanye.wan@gmail.com
     $.fn.setItemsCheckState = function(itemIds, ischecked, cascadecheck) {
         if (this[0].t) {
             return this[0].t.setItemsCheckState(itemIds, ischecked, cascadecheck);
+        }
+    };
+    //展开/收起某节点
+    $.fn.toggleItem = function(itemId) {
+        if (this[0].t) {
+            return this[0].t.toggle(itemId);
         }
     };
 })(jQuery);
