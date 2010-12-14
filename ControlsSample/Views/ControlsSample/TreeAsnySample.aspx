@@ -11,6 +11,7 @@
         <button id="showchecked">获取选中的节点</button>
         <button id="showcurrent">获取当前节点</button>
         <button id="reflashshanghai">刷新上海节点</button>
+        <button id="expandshanghai">刷新上海节点</button>
         <button id="btnSelectAll">全选</button>
         <button id="btnUnSelectAll">全不选</button>
     </div>
@@ -54,6 +55,10 @@
             $("#reflashshanghai").click(function(e) {
                 $("#tree").reflash("9"); //9 为节点的ID
             });
+            $("#expandshanghai").click(function(e) {
+                $("#tree").toggleItem("9"); //9 为节点的ID 展开
+            });
+            
             //全选
             $("#btnSelectAll").click(function(e) {
                 $("#tree").checkAll(); 
