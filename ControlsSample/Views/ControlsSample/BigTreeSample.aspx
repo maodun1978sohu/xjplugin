@@ -5,6 +5,14 @@
     <title>Big Tree</title>
   
     <link href="../../Themes/Default/tree.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        /*
+       .bbit-tree-selected a.bbit-tree-node-anchor span
+       {
+           background:url("/images/icons/tick.png") no-repeat center right;
+           padding-right:20px;
+        }*/
+    </style>
     
 </head>
 <body class='ie'>
@@ -63,7 +71,7 @@
             });
             //选中不级联
             $("#btnSelectSome").click(function(e) {
-                $("#tree").setItemsCheckState("75,92",true,false);
+                $("#tree").setItemsCheckState("75",true,false);
             });
         }   
         if( $.browser.msie6)
