@@ -394,7 +394,10 @@ author:xuanye.wan@gmail.com
                     async: isAsync,
                     dataType: dfop.datatype,
                     success: callback,
-                    error: function(e) { alert("error occur!"); }
+                    error: function(e) {
+                        //debugger;
+                        alert("error occur:" + e.responseText);
+                    }
                 });
             }
         }
