@@ -454,3 +454,8 @@ ul.x-tab-strip li.x-tab-edge {
 {
     display:none !important;
 }
+
+.x-tab-widthlimit /******add 20110428 by xuanye*****/
+{
+overflow: hidden; text-overflow:ellipsis;
+}

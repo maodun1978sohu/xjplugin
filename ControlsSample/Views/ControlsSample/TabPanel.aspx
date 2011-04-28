@@ -10,6 +10,7 @@
         {
             background-image:url("/images/icons/home.png");
         }
+      
     </style>
     <script src="../../Javascripts/jquery-1.4.2.min.js" type="text/javascript"></script>
     <script src="../../Javascripts/common.js" type="text/javascript"></script>
@@ -18,10 +19,10 @@
           $(document).ready(function(e) {
               var items = [{ id: "home", text: "主页", classes: "icon_home", isactive: true, content: "欢迎光临" },
             { id: "baidu", text: "百度", closeable: true, url: "http://www.baidu.com/" },
-            { id: "tab3", text: "tab3", disabled: true, content: "tab3" },
+            { id: "tab3", text: "我也很长，但是我没有限制", disabled: true, content: "tab3" },
             { id: "tab4", text: "tab4", closeable: true, cuscall: tabitem_cuscall },
             { id: "tab5", text: "tab5", closeable: true, content: "tab5", onactive: tabitem_onactive },
-            { id: "tab6", text: "tab6", closeable: true, content: "tab6" },
+            { id: "tab6", text: "我这个Item很长很长很长很长很长很长",width:100, closeable: true, content: "tab6" },
             { id: "tab7", text: "tab7", closeable: true, content: "tab7" },
             { id: "tab8", text: "tab8", closeable: true, content: "tab8" }
             ];
