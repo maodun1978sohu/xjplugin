@@ -48,8 +48,8 @@
         function builditemlihtml(item, parray) {
             parray.push("<li id='tab_li_", item.id, "' class='", item.isactive ? "x-tab-strip-active" : "", item.disabled ? "x-tab-strip-disabled" : "", item.closeable ? " x-tab-strip-closable" : "", item.classes ? " x-tab-with-icon" : "", "'>");
             parray.push("<a class='x-tab-strip-close' onclick='return false;'/>");
-            parray.push("<a class='x-tab-right' onclick='return false;' href='#'>");
-            parray.push("<em class='x-tab-left'><span class='x-tab-strip-inner'><span class='x-tab-strip-text ", item.classes || "", "'>", item.text, "</span></span></em>");
+            parray.push("<a class='x-tab-right' onclick='return false;' title=\"", item.text, "\" href='#'>");
+            parray.push("<em class='x-tab-left'><span class='x-tab-strip-inner'><span class='x-tab-strip-text ", item.classes || "", item.width ? "x-tab-widthlimit" : "", "'", item.width ? "style='width:" + item.width + "px;'" : "", ">", item.text, "</span></span></em>");
             parray.push("</a></li>");
         }
         function builditembodyhtml(item, parray) {
