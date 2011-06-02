@@ -78,7 +78,7 @@
                      { text: "刷新", icon: "/images/icons/table_refresh.png", alias: "contextmenu-reflash", action: contextMenuItem_click }
                 ]
                 };
-                function contextMenuItem_click(target) {
+            function contextMenuItem_click(target) {
                     var id = $(target).attr("id").substr(3);
                     var cmd = this.data.alias;
                     var ch = $.browser.msie ? target.ch : target.getAttribute("ch");

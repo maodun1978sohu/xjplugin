@@ -1,10 +1,6 @@
 ﻿/// <reference path="../intellisense/jquery-1.2.6-vsdoc-cn.js" /> 
-(function($) {
-    var userAgent = window.navigator.userAgent.toLowerCase();
-    $.browser.msie8 = $.browser.msie && /msie 8\.0/i.test(userAgent);
-    $.browser.msie7 = $.browser.msie && /msie 7\.0/i.test(userAgent);
-    $.browser.msie6 = !$.browser.msie8 && !$.browser.msie7 && $.browser.msie && /msie 6\.0/i.test(userAgent);
-
+(function($) {   
+    $.browser.msie6 =  $.browser.msie && !window.XMLHttpRequest;
     Date.prototype.Format = function(format) {
         var o = {
             "M+": this.getMonth() + 1,
@@ -68,7 +64,7 @@
             onReturn: false,
             version: "1.1",
             applyrule: false, //function(){};return rule={startdate,endate};
-            showtarget: null,
+            showtarget: null,		
             picker: ""
         };
         $.extend(def, o);
