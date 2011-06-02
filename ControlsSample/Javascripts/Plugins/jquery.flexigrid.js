@@ -41,14 +41,17 @@
             onSuccess: false, //成功后执行
             onSubmit: false, // using a custom populate function,调用自定义的计算函数
             showcheckbox: false, //是否显示checkbox    
-            singleselected:false, //是否单选
+            singleselected: false, //是否单选
             rowhandler: false, //是否启用行的扩展事情功能
             rowbinddata: false,
-            selectedonclick:false, //点击行是否选中
+            selectedonclick: false, //点击行是否选中
+            showrownum: true, //是否显示行号，只有在checkbox不显示的情况下有用即showcheckbox:false
             extParam: {},
             //Style
             gridClass: "bbit-grid",
-            onrowchecked: false
+            onrowchecked: false, //当行被选中时触发的事件，这里指checkbox选中
+            postColInfo: true //是否向服务端发送列信息 注册该值需要配置colKey
+
         }, p);
 
         $(t)
@@ -74,7 +77,7 @@
                 $('thead tr:first th:visible', this.hDiv).each(function() {
                     if ($(this).css("display") == "none") {
                         return;
-                    }                  
+                    }
                     var n = i;
                     //var n = $('thead tr:first th:visible', g.hDiv).index(this);			 	  
                     var cdpos = parseInt($('div', this).width());
@@ -372,6 +375,7 @@
                 var thsdivs = $('thead tr:first th div', g.hDiv);
                 var tbhtml = [];
                 tbhtml.push("<tbody>");
+                var pindex = p.rp * (p.page - 1);
                 if (p.dataType == 'json') {
                     if (data.rows != null) {
                         $.each(data.rows, function(i, row) {
@@ -404,8 +408,9 @@
                                     div.push("white-space:normal");
                                 }
                                 div.push("'>");
-                                if (idx == "-1") { //checkbox
-                                    div.push("<input type='checkbox' id='chk_", row.id, "' class='itemchk' value='", row.id, "'/>");
+                                if (idx == "-1" || idx == "-2") { //checkbox
+                                    idx == "-1" && div.push("<input type='checkbox' id='chk_", row.id, "' class='itemchk' value='", row.id, "'/>");
+                                    idx == "-2" && p.showrownum && div.push("<em>", pindex + i + 1, "</em>");
                                     if (tdclass != "") {
                                         tdclass += " chboxtd";
                                     } else {
@@ -415,7 +420,7 @@
                                 else {
                                     var divInner = row.cell[idx] || "&nbsp;";
                                     if (this.process) {
-                                        divInner = this.process(divInner, trid);
+                                        divInner = this.process(divInner, trid, row.cell);
                                     }
                                     div.push(divInner);
                                 }
@@ -472,8 +477,9 @@
 				 	        }
 				 	        div.push("'>");
 
-				 	        if (idx == "-1") { //checkbox
-				 	            div.push("<input type='checkbox' id='chk_", nid, "' class='itemchk' value='", nid, "'/>");
+				 	        if (idx == "-1" || idx == "-2") { //checkbox
+				 	            idx == "-1" && div.push("<input type='checkbox' id='chk_", nid, "' class='itemchk' value='", nid, "'/>");
+				 	            idx == "-2" && p.showrownum && div.push("<em>", pindex + i + 1, "</em>");
 				 	            if (tdclass != "") {
 				 	                tdclass += " chboxtd";
 				 	            } else {
@@ -578,7 +584,28 @@
 					, { name: 'qtype', value: p.qtype }
 					, { name: 'qop', value: p.qop }
 				];
-                //param = jQuery.extend(param, p.extParam);
+                if (p.postColInfo)//如果需要向服务提交列信息
+                {
+                    if (!p.colkey) {
+                        var cols = [];
+                        for (var cindex = 0, clength = p.colModel.length; cindex < clength; cindex++) {
+                            if (p.colModel[cindex].iskey) {
+                                p.colkey = p.colModel[cindex].name;
+
+                            }
+                            cols.push(p.colModel[cindex].name);
+
+                        }
+                        p.cols = cols.join(",");
+                    }
+                    if (!p.colkey) {
+                        alert("请设置主键 { display: '说明', name: '字段名',iskey:true },");
+                        return;
+                    }
+                    param.push({ name: "colkey", value: p.colkey });
+                    param.push({ name: "colsinfo", value: p.cols });
+                }
+                //param = jQuery.extend(param, p.extParam);             
                 if (p.extParam) {
                     for (var pi = 0; pi < p.extParam.length; pi++) param[param.length] = p.extParam[pi];
                 }
@@ -707,8 +734,8 @@
             },
             getSelectedRows: function() {
                 var items = [];
-                if(!p.rowbinddata){
-                   alert("请将属性rowbinddata设置为true");
+                if (!p.rowbinddata) {
+                    alert("请将属性rowbinddata设置为true");
                 }
                 $("tr.trSelected", g.bDiv).each(function() {
                     items.push($(this).attr("CH").split('_FG$SP_'));
@@ -735,49 +762,44 @@
                     $(this).hover(function() { $(this).addClass('trOver'); }, function() { $(this).removeClass('trOver'); });
                 }
             },
-            checkhandler:function()
-            {
+            checkhandler: function() {
                 var $t = $(this);
                 var $ck = $("input.itemchk", this);
-                if(p.singleselected)
-                {
-                    $t.parent().find("tr.trSelected").each(function(e){
-                        if(this !=$t[0])
-                        {
+                if (p.singleselected) {
+                    $t.parent().find("tr.trSelected").each(function(e) {
+                        if (this != $t[0]) {
                             $(this).removeClass("trSelected");
                         }
-                        $("input.itemchk", this).each(function(e){this.checked =false;});
+                        $("input.itemchk", this).each(function(e) { this.checked = false; });
                     });
                 }
-                if($t.hasClass("trSelected"))
-                {
-                    $ck.length>0 && ($ck[0].checked=false);
+                if ($t.hasClass("trSelected")) {
+                    $ck.length > 0 && ($ck[0].checked = false);
                     $t.removeClass("trSelected");
                 }
-                else{
-                     $ck.length>0 && ($ck[0].checked =true);
-                     $t.addClass("trSelected");
-                }                
+                else {
+                    $ck.length > 0 && ($ck[0].checked = true);
+                    $t.addClass("trSelected");
+                }
             },
             addRowProp: function() {
                 var $gF = this.rowProp;
                 var $cf = this.checkhandler;
                 $('tbody tr', g.bDiv).each(
                     function() {
-                        if(p.showcheckbox)
-                        {
-                            $("input.itemchk", this).each(function() {                               
-                                $(this).click(function(e) {                                    
+                        if (p.showcheckbox) {
+                            $("input.itemchk", this).each(function() {
+                                $(this).click(function(e) {
                                     var ptr = $(this).parent().parent().parent();
                                     $cf.call(ptr);
                                     if (p.onrowchecked) {
                                         p.onrowchecked.call(this);
                                     }
-                                    e.stopPropagation();                             
+                                    e.stopPropagation();
                                 });
                             });
                         }
-                        if(p.selectedonclick) //点击切换选中状态
+                        if (p.selectedonclick) //点击切换选中状态
                         {
                             $(this).click($cf);
                         }
@@ -812,16 +834,22 @@
             thead = document.createElement('thead');
             tr = document.createElement('tr');
             //p.showcheckbox ==true;
+            var cth = jQuery('<th/>');
+            cth.addClass("cth").attr({ width: "15", "isch": true })
             if (p.showcheckbox) {
-                var cth = jQuery('<th/>');
+
                 var cthch = jQuery('<input type="checkbox"/>');
                 cthch.addClass("noborder");
-                if(p.singleselected){
-                    cthch.attr("disabled",true).css("visibility","hidden");
+                if (p.singleselected) {
+                    cthch.attr("disabled", true).css("visibility", "hidden");
                 }
-                cth.addClass("cth").attr({ 'axis': "col-1", width: "15", "isch": true }).append(cthch);
-                $(tr).append(cth);
+                cth.attr('axis', "col-1");
+                cth.append(cthch);
             }
+            else {
+                cth.attr('axis', "col-2");
+            }
+            $(tr).append(cth);
             for (i = 0; i < p.colModel.length; i++) {
                 var cm = p.colModel[i];
                 var th = document.createElement('th');
@@ -1304,22 +1332,25 @@
             $('th div', g.hDiv).each
 			(
 			 	function() {
-			 	    var kcol = $("th[axis='col" + cn + "']", g.hDiv)[0];
-			 	    if (kcol == null) return;
-			 	    var chkall = $("input[type='checkbox']", this);
-			 	    if (chkall.length > 0) {
-			 	        chkall[0].onclick = g.checkAllOrNot;
-			 	        return;
-			 	    }
-			 	    if (kcol.toggle == false || this.innerHTML == "") {
-			 	        cn++;
-			 	        return;
-			 	    }
-			 	    var chk = 'checked="checked"';
-			 	    if (kcol.style.display == 'none') chk = '';
+                        var kcol = $(this).parent("th");
+                        var chkall = $("input[type='checkbox']", this);
+                        if (chkall.length > 0) {
+                            chkall[0].onclick = g.checkAllOrNot;
+                            return;
+                        }
+                        if (kcol.attr("isch")) {
+                            return;
+                        }
+                        if (kcol[0].toggle == false || this.innerHTML == "") {
+                            cn++;
+                            return;
+                        }
+                        var chk = 'checked="checked"';
+                        if (kcol.css("display") == 'none')
+                        { chk = ''; }
 
-			 	    $('tbody', g.nDiv).append('<tr><td class="ndcol1"><input type="checkbox" ' + chk + ' class="togCol noborder" value="' + cn + '" /></td><td class="ndcol2">' + this.innerHTML + '</td></tr>');
-			 	    cn++;
+                        $('tbody', g.nDiv).append('<tr><td class="ndcol1"><input type="checkbox" ' + chk + ' class="togCol noborder" value="' + cn + '" /></td><td class="ndcol2">' + this.innerHTML + '</td></tr>');
+                        cn++;
 			 	}
 			);
 
