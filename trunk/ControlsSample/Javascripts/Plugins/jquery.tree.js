@@ -33,12 +33,13 @@ author:xuanye.wan@gmail.com
                 method: "POST",
                 datatype: "json",
                 url: false,
-                cbiconpath: "/images/icons/",
+                cbiconpath: "/statics/images/icons/",
                 icons: ["checkbox_0.gif", "checkbox_1.gif", "checkbox_2.gif"],
-                emptyiconpath: "/Themes/Shared/images/s.gif",
+                emptyiconpath: "/statics/images/icons/s.gif",
                 showcheck: false, //是否显示选择            
                 oncheckboxclick: false, //当checkstate状态变化时所触发的事件，但是不会触发因级联选择而引起的变化
                 onnodeclick: false,
+                parsedata: false,
                 cascadecheck: true,
                 data: null,
                 clicktoggle: true, //点击节点展开和收缩子节点
@@ -82,6 +83,7 @@ author:xuanye.wan@gmail.com
             else {
                 asnyloadc(null, false, function(data) {
                     if (data && data.length > 0) {
+                        dfop.parsedata && dfop.parsedata(data);
                         treenodes = data;
                         dfop.data = data;
                         var l = data.length;
@@ -292,6 +294,7 @@ author:xuanye.wan@gmail.com
                         else {
                             $(this).addClass("bbit-tree-node-loading");
                             asnyloadc(item, true, function(data) {
+                                dfop.parsedata && dfop.parsedata(data);
                                 item.complete = true;
                                 item.ChildNodes = data;
                                 asnybuild(data, deep, path, ul, item);
@@ -385,8 +388,16 @@ author:xuanye.wan@gmail.com
         }
         function asnyloadc(pnode, isAsync, callback) {
             if (dfop.url) {
-                if (pnode && pnode != null)
+                param;
+                if (pnode && pnode != null) {
                     var param = builparam(pnode);
+                }
+                else {
+                    param = [];
+                }
+                if (dfop.extParam) {
+                    for (var pi = 0; pi < dfop.extParam.length; pi++) param[param.length] = dfop.extParam[pi];
+                }
                 $.ajax({
                     type: dfop.method,
                     url: dfop.url,
@@ -439,6 +450,7 @@ author:xuanye.wan@gmail.com
                 var item = getItem(path);
                 if (item) {
                     asnyloadc(item, true, function(data) {
+                        dfop.parsedata && dfop.parsedata(data);
                         item.complete = true;
                         item.ChildNodes = data;
                         item.isexpand = true;
@@ -499,7 +511,7 @@ author:xuanye.wan@gmail.com
             getCurrentItem: function() {
                 return dfop.citem;
             },
-            reflash: function(itemOrItemId) {
+            refresh: function(itemOrItemId) {
                 var id;
                 if (typeof (itemOrItemId) == "string") {
                     id = itemOrItemId;
@@ -543,6 +555,9 @@ author:xuanye.wan@gmail.com
                 if (itemId) {
                     togglebyId(itemId);
                 }
+            },
+            getTreeData: function() {
+                return dfop.data;
             }
         };
         return me;
@@ -569,9 +584,9 @@ author:xuanye.wan@gmail.com
         return null;
     };
     //刷新指定节点
-    $.fn.reflash = function(ItemOrItemId) {
+    $.fn.refresh = function(ItemOrItemId) {
         if (this[0].t) {
-            return this[0].t.reflash(ItemOrItemId);
+            return this[0].t.refresh(ItemOrItemId);
         }
     };
     //设置全选
@@ -598,4 +613,10 @@ author:xuanye.wan@gmail.com
             return this[0].t.toggle(itemId);
         }
     };
+    //获取树的整个数据
+    $.fn.getTreeData = function() {
+        if (this[0].t) {
+            return this[0].t.getTreeData();
+        }
+    }
 })(jQuery);
