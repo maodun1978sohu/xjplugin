@@ -36,3 +36,15 @@ Flexigrid
 2011-04-28
 1:tabpanel 新增可以指定选项卡长度 ，可放置因内容太多撑大而影响美观
 在item配置上直接使用width 即可
+
+2011-06-01
+1 Flexigrid
+新增行号
+向服务端发送字段绑定信息
+
+2011-06-10
+1：TreeView 新增参数extParam ，可在提交异步请求时 附带额外的参数
+2：TreeView 新增获取全部树节点数据的方法  $.fn.getTreeData
+
+2011-06-25
+1:datepicker 增加时间选择
