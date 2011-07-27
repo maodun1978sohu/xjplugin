@@ -136,7 +136,7 @@ ul.x-tab-strip li.x-tab-edge {
 	white-space: nowrap;
 	cursor:pointer;
     padding:4px 0;
-    font:normal 11px tahoma,arial,helvetica;
+    font:normal 12px "Î¢ÈíÑÅºÚ" tahoma,arial,helvetica;
     color:#416aa3;    
 }
 
@@ -302,8 +302,21 @@ ul.x-tab-strip li.x-tab-edge {
     opacity:1;
     -moz-opacity:1;
 }
-
-
+.x-tab-strip li.x-tab-closeall
+{
+    margin-left:0px;
+}
+.x-tab-strip .x-tab-closeall a
+{
+    display:block;
+    width:24px;
+    background:url("images/tabpanel/closeallbg.gif")  no-repeat left top;
+    padding:5px 0px 0px 0px;
+}
+.x-tab-strip .x-tab-closeall a:hover
+{
+    background-position: 0px -50px;
+}
 .x-tab-scroller-left {
     background: transparent no-repeat -18px 0;
     border-bottom: 1px solid;
@@ -454,8 +467,40 @@ ul.x-tab-strip li.x-tab-edge {
 {
     display:none !important;
 }
-
-.x-tab-widthlimit /******add 20110428 by xuanye*****/
+.x-el-mask
 {
-overflow: hidden; text-overflow:ellipsis;
+    z-index:100;
+    position:absolute;
+    filter:alpha(opacity=50); BACKGROUND-COLOR: #ccc;
+    width:100%;
+    height:100%;
+    left:0px;
+    top:0px;
+    zoom:1;
+    -moz-opacity:0.5;
+    opacity:50;
+}
+.x-el-mask-msg {
+    z-index: 20001;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border:1px solid #6593cf;
+    background:#c3daf9 url(images/tabpanel/tb-blue.gif) repeat-x 0 -16px;
+    padding:2px;
+}
+
+.x-el-mask-msg div {
+    padding:5px 10px 5px 10px;
+    border:1px solid #a3bad9;
+    cursor:wait;
+    color:#222;
+    font:normal 12px "Î¢ÈíÑÅºÚ" tahoma, arial, helvetica, sans-serif;
+}
+
+.x-mask-loading div 
+{
+    padding:5px 10px 5px 25px;
+    background:#fbfbfb url(images/tabpanel/loading.gif) no-repeat 5px 5px;
+    line-height:16px;
 }

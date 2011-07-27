@@ -46,8 +46,11 @@ Flexigrid
 1：TreeView 新增参数extParam ，可在提交异步请求时 附带额外的参数
 2：TreeView 新增获取全部树节点数据的方法  $.fn.getTreeData
 
+2011-06-18
+1:flexigrid 增加隐藏左边栏的功能
+
 2011-06-25
 1:datepicker 增加时间选择
 
-2011-07-18
-1:修改增加不显示左边栏的功能
+2011-07-26
+1:tabpanel 新增关闭全部的按钮
